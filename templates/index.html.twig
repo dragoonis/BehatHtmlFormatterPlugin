@@ -102,12 +102,12 @@
         {#<a class="btn btn-danger" id="feature-failed-filter" role="button">Failed</a>#}
     {#</div>#}
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#all-suites">All Suites</a></li>
-        {% for suite in suites %}
-        <li role="presentation"><a href="#suite-features-{{ suite.id }}">{{ suite.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {#<ul class="nav nav-tabs">#}
+        {#<li role="presentation" class="active"><a href="#all-suites">All Suites</a></li>#}
+        {#{% for suite in suites %}#}
+        {#<li role="presentation"><a href="#suite-features-{{ suite.id }}">{{ suite.name }}</a></li>#}
+        {#{% endfor %}#}
+    {#</ul>#}
 
     <div id="feature-overview">
         {% for suite in suites %}
