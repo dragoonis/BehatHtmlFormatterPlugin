@@ -17,7 +17,6 @@ class Feature
     private $description;
     private $tags;
     private $file;
-    private $screenshotFolder;
     private $failedScenarios = 0;
     private $passedScenarios = 0;
     private $scenarioCounter = 1;
@@ -85,30 +84,12 @@ class Feature
         return $this->file;
     }
 
-
-
     /**
      * @param mixed $file
      */
     public function setFile($file)
     {
         $this->file = $file;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getScreenshotFolder()
-    {
-        return $this->screenshotFolder;
-    }
-
-    /**
-     * @param String $featureName
-     */
-    public function setScreenshotFolder($featureName)
-    {
-        $this->screenshotFolder = str_replace(' ','', $featureName);
     }
 
     /**

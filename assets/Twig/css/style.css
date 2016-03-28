@@ -68,15 +68,16 @@ body {
   border-radius: 3px;
   width: 100%;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
 }
 .card:hover {
   cursor: pointer;
 }
 .card.passed .header {
-  background-color: #00a65a;
+  background-color: #65cea7;
 }
 .card.failed .header {
-  background-color: #f56956;
+  background-color: #fc8675;
 }
 .card .header {
   color: #fff;
@@ -101,7 +102,7 @@ body {
 }
 .card .info {
   padding: 10px;
-  height: 130px;
+  /*height: 130px;*/
 }
 .card .footer {
   border-top: 1px solid #f4f4f4;
@@ -132,11 +133,11 @@ body {
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 .progress .progress-bar-green {
-  background-color: #00a65a !important;
+  background-color: #65cea7 !important;
   background-image: none !important;
 }
 .progress .progress-bar-red {
-  background-color: #f56954 !important;
+  background-color: #fc8675 !important;
   background-image: none !important;
 }
 #scenario-overview {
@@ -150,15 +151,114 @@ body {
 }
 #scenario-overview .feature .details .panel.passed > .panel-heading {
   color: white;
-  background-color: #00a65a;
+  background-color: #65cea7;
   background-image: none;
 }
 #scenario-overview .feature .details .panel.failed > .panel-heading {
   color: white;
-  background-color: #f56956;
+  background-color: #fc8675;
   background-image: none;
 }
+
+
+#scenario-overview .details {
+  padding-top: 12px;
+}
+
+.feature .feature-scenario-list {
+  margin-top: 12px;
+}
+
 .list-group-item.break {
   padding: 1px;
   background-color: #808080;
+}
+
+.panel.panel-default {
+  border-color: #f1f5fc;
+}
+
+.bg-warning {
+  background-color: #f3ce85 !important;
+  color: #fff;
+}
+
+.panel-stat2 {
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.panel {
+  position: relative;
+  background: #fff;
+}
+
+.panel-stat2 .stat-icon {
+  display: inline-block;
+  float: left;
+  font-size: 50px;
+  line-height: 83px;
+  transition: all .8s ease;
+  -webkit-transition: all .8s ease;
+  -moz-transition: all .8s ease;
+  -ms-transition: all .8s ease;
+  -o-transition: all .8s ease;
+}
+
+.panel-stat2 .value {
+  font-size: 60px;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+  -moz-transition: all .4s ease;
+  -ms-transition: all .4s ease;
+  -o-transition: all .4s ease;
+}
+
+.panel-stat2 .title {
+  font-size: 30px;
+  margin-top: 5px;
+  margin-right: 10px;
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
+  -moz-transition: all .4s ease;
+  -ms-transition: all .4s ease;
+  -o-transition: all .4s ease;
+}
+
+.bg-success {
+  background-color: #65cea7;
+  color: #fff;
+}
+.panel-stat1 {
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.bg-danger {
+  background-color: #fc8675 !important;
+  color: #fff !important;
+}
+
+.progress-bar-danger {
+  background-color: #fc8675 !important;
+  background-image: linear-gradient(to bottom,#fc8675 0,#fc8675 100%);
+}
+
+.progress-bar-success {
+  background-image: linear-gradient(to bottom,#65cea7 0,#65cea7 100%);
+}
+
+#main-progress-bar-row {
+  margin-bottom: 12px;
+}
+
+#main-progress-bar-row .progress-bar {
+  font-size: 25px;
+  padding: 2px;
+}
+
+#main-progress-bar-row .progress {
+  height: 25px;
+  margin:0 0 0 0;
 }
