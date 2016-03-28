@@ -262,3 +262,7 @@ body {
   height: 25px;
   margin:0 0 0 0;
 }
+
+.go-back-container {
+  margin-top: 12px;
+}

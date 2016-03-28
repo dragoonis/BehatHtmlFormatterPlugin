@@ -50,44 +50,73 @@
 </nav>
 
 <div class="container theme-showcase" role="main">
-    <div class="row charts">
-        <div class="col-sm-4">
-            <div class="canvas-holder">
-                <canvas id="chart-features" width="300" height="300"/>
+
+
+
+    <div class="row">
+
+
+
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default panel-stat2 bg-success">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <div class="value">{{ passedScenarios|length }} / {{ (failedScenarios|length) + (passedScenarios|length) }} ({{ percentScenariosPassed }}%)</div>
+                        <div class="title">Scenarios Passed</div>
+                    </div>
+                </div>
             </div>
-            {{ failedFeatures|length }} features failed of {{ (failedFeatures|length) + (passedFeatures|length) }}
-            features
         </div>
-        <div class="col-sm-4">
-            <div class="canvas-holder">
-                <canvas id="chart-scenarios" width="300" height="300"/>
+
+        <div class="col-md-6 col-sm-6">
+            <div class="panel panel-default panel-stat2 bg-danger">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <div class="value">{{ failedScenarios|length }} / {{ (failedScenarios|length) + (passedScenarios|length) }} ({{ percentScenariosFailed }}%)</div>
+                        <div class="title">Scenarios Failed</div>
+                    </div>
+                </div>
             </div>
-            {{ failedScenarios|length }} scenarios failed of {{ (failedScenarios|length) + (passedScenarios|length) }}
-            scenarios
         </div>
-        <div class="col-sm-4">
-            <div class="canvas-holder">
-                <canvas id="chart-steps" width="300" height="300"/>
-            </div>
-            {{ failedSteps|length }} steps failed of {{ (failedSteps|length) + (passedSteps|length) }}
-        </div>
+
     </div>
-    <hr>
-    <div class="filters">
-        <a class="btn btn-default" id="feature-all-filter" role="button">All</a>
-        <a class="btn btn-success" id="feature-passed-filter" role="button">Passed</a>
-        <a class="btn btn-danger" id="feature-failed-filter" role="button">Failed</a>
-    </div>
-    <hr>
+
+
+
+    <div class="row" id="main-progress-bar-row">
+        <div class="col-xs-12">
+            <div class="progress active">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success" style="width: {{ percentScenariosPassed }}%">{{ percentScenariosPassed }}%
+                    </div>
+                    <div class="progress-bar progress-bar-danger" style="width: {{ percentScenariosFailed }}%">{{ percentScenariosFailed }}%
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+    {#<div class="filters">#}
+        {#<a class="btn btn-default" id="feature-all-filter" role="button">All</a>#}
+        {#<a class="btn btn-success" id="feature-passed-filter" role="button">Passed</a>#}
+        {#<a class="btn btn-danger" id="feature-failed-filter" role="button">Failed</a>#}
+    {#</div>#}
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#all-suites">All Suites</a></li>
+        {% for suite in suites %}
+        <li role="presentation"><a href="#suite-features-{{ suite.id }}">{{ suite.name }}</a></li>
+        {% endfor %}
+    </ul>
+
     <div id="feature-overview">
         {% for suite in suites %}
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>Suite: {{ suite.name }}</h2>
+            <div class="row" id="suite-feature-{{ suite.id }}">
+                <div class="col-sm-4">
 
                     <div class="row">
                         {% for feature in suite.features %}
-                            <div class="col-sm-4 feature" data-id="feature-{{ feature.id }}">
+                            <div class="col-sm-12 feature" data-id="feature-{{ feature.id }}">
                                 <div class="card {{ feature.getPassedClass }}">
                                     <div class="header">
                                         <h2>Feature: {{ feature.name }}</h2>
@@ -105,14 +134,13 @@
                                             <div class="progress">
 
                                                 <div class="progress-bar progress-bar-green" role="progressbar"
-                                                     style="width: {{ feature.getPercentPassed }}%">
-                                                    <span class="sr-only">40% Complete (success)</span>
+                                                     style="width: {{ feature.getPercentPassed }}%">{{ feature.getPercentPassed|round }}%
                                                 </div>
                                                 <div class="progress-bar progress-bar-red" role="progressbar"
-                                                     style="width: {{ feature.getPercentFailed }}%">
-                                                    <span class="sr-only">40% Complete (success)</span>
+                                                     style="width: {{ feature.getPercentFailed }}%">{{ feature.getPercentFailed|round }}%
                                                 </div>
                                             </div>
+                                            <div>{{ feature.getPassedScenarios }} / {{ feature.getTotalAmountOfScenarios }} ({{ feature.getPercentPassed|round }}%) scenarios passed</div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -146,15 +174,15 @@
                                     <div class="progress">
 
                                         <div class="progress-bar progress-bar-green" role="progressbar"
-                                             style="width: {{ feature.getPercentPassed }}%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                             style="width: {{ feature.getPercentPassed }}%">{{ feature.getPercentPassed|round }}%
                                         </div>
                                         <div class="progress-bar progress-bar-red" role="progressbar"
-                                             style="width: {{ feature.getPercentFailed }}%">
-                                            <span class="sr-only">40% Complete (success)</span>
+                                             style="width: {{ feature.getPercentFailed }}%">{{ feature.getPercentFailed|round }}%
                                         </div>
                                     </div>
+                                    <div>{{ feature.getPassedScenarios }} / {{ feature.getTotalAmountOfScenarios }} ({{ feature.getPercentPassed|round }}%) scenarios passed</div>
                                 {% endif %}
+                                <div><a href="#go-back" class="go-back btn btn-default">Go Back</a></div>
                             </div>
                         </div>
                     </div>
@@ -292,29 +320,12 @@
     $(function () {
         $('.collapse').collapse();
 
-        $('.filters').click()
-        {
+        $('#scenario-overview .go-back').click(function (e) {
+            e.preventDefault();
             showOverview();
-        }
+        });
 
-        $('.filters #feature-failed-filter').click(function () {
-            showOverview();
-            $('.feature').hide();
-            $('.card.failed').parent().show();
-        });
-        $('.filters #feature-passed-filter').click(function () {
-            showOverview();
-            $('.feature').hide();
-            $('.card.passed').parent().show();
-        });
-        $('.filters #feature-all-filter').click(function () {
-            showOverview();
-            $('.feature').show();
-        });
-    });
-
-    $(function () {
-        $(".feature").click(function () {
+        $("#feature-overview .feature").click(function () {
             var featureId = $(this).data("id");
             showDetails();
             showFeatureDetail(featureId);
