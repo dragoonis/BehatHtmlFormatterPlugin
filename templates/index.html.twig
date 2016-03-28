@@ -57,6 +57,7 @@
 
 
 
+        {% if failedScenarios|length > 0 %}
         <div class="col-md-6 col-sm-6">
             <div class="panel panel-default panel-stat2 bg-success">
                 <div class="panel-body">
@@ -79,22 +80,33 @@
             </div>
         </div>
 
-    </div>
-
-
-
-    <div class="row" id="main-progress-bar-row">
-        <div class="col-xs-12">
-            <div class="progress active">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" style="width: {{ percentScenariosPassed }}%">{{ percentScenariosPassed }}%
+        <div class="row" id="main-progress-bar-row">
+            <div class="col-xs-12">
+                <div class="progress active">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success" style="width: {{ percentScenariosPassed }}%">{{ percentScenariosPassed }}%
+                        </div>
+                        <div class="progress-bar progress-bar-danger" style="width: {{ percentScenariosFailed }}%">{{ percentScenariosFailed }}%
+                        </div>
                     </div>
-                    <div class="progress-bar progress-bar-danger" style="width: {{ percentScenariosFailed }}%">{{ percentScenariosFailed }}%
+                </div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+
+        {% else %}
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-default panel-stat2 bg-success">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <div class="value">{{ passedScenarios|length }} / {{ (failedScenarios|length) + (passedScenarios|length) }} ({{ percentScenariosPassed }}%)</div>
+                            <div class="title">Scenarios Passed</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div><!-- /.col -->
-    </div><!-- /.row -->
+        {% endif %}
+
+    </div>
 
     {#<div class="filters">#}
         {#<a class="btn btn-default" id="feature-all-filter" role="button">All</a>#}
@@ -102,12 +114,12 @@
         {#<a class="btn btn-danger" id="feature-failed-filter" role="button">Failed</a>#}
     {#</div>#}
 
-    <ul class="nav nav-tabs">
-        <li role="presentation" class="active"><a href="#all-suites">All Suites</a></li>
-        {% for suite in suites %}
-        <li role="presentation"><a href="#suite-features-{{ suite.id }}">{{ suite.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {#<ul class="nav nav-tabs">#}
+        {#<li role="presentation" class="active"><a href="#all-suites">All Suites</a></li>#}
+        {#{% for suite in suites %}#}
+        {#<li role="presentation"><a href="#suite-features-{{ suite.id }}">{{ suite.name }}</a></li>#}
+        {#{% endfor %}#}
+    {#</ul>#}
 
     <div id="feature-overview">
         {% for suite in suites %}
@@ -182,7 +194,7 @@
                                     </div>
                                     <div>{{ feature.getPassedScenarios }} / {{ feature.getTotalAmountOfScenarios }} ({{ feature.getPercentPassed|round }}%) scenarios passed</div>
                                 {% endif %}
-                                <div><a href="#go-back" class="go-back btn btn-default">Go Back</a></div>
+                                <div class="go-back-container"><a href="#go-back" class="go-back btn btn-default"><span class="glyphicon glyphicon-backward" aria-hidden="true"></span>&nbsp;&nbsp;Go Back</a></div>
                             </div>
                         </div>
                     </div>
